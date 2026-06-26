@@ -115,37 +115,6 @@ privacy-shield-auditor/
 
 ---
 
-## 📋 API Reference
-
-The backend exposes a single endpoint:
-
-**POST** `/api/audit`
-
-**Request body:**
-```json
-{
-  "url": "https://instagram.com"
-}
-```
-
-**Response:**
-```json
-{
-  "status": "success",
-  "audit_timestamp": "2024-01-15T14:32:07",
-  "is_https": true,
-  "total_links_found": 1,
-  "total_cookies_found": 2,
-  "compliance_grade": "B",
-  "cookies": [
-    { "name": "_ga", "domain": ".instagram.com", "tracker": "Google Analytics" },
-    { "name": "sessionid", "domain": ".instagram.com", "tracker": null }
-  ]
-}
-```
-
----
-
 ## ⚠️ Known Limitations
 
 - The scraper uses `requests` which does not execute JavaScript. Sites that load all content dynamically may return fewer links than expected. A common privacy URL fallback is included to partially address this.
