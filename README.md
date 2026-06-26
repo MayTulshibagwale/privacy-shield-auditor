@@ -11,8 +11,7 @@ Built as a portfolio project demonstrating web scraping, REST API design, and br
 - 🔒 **HTTPS Detection** — flags whether the site uses a secure connection
 - ⚖️ **Policy Link Scanner** — finds Privacy Policy, Cookie Notice, and Terms of Service links
 - 🍪 **Cookie Tracker** — counts and identifies all cookies the site drops
-- 🎯 **Known Tracker Detection** — recognizes 25+ trackers from Google, Facebook, LinkedIn, Twitter, and more
-- 🌍 **First vs Third-Party Classification** — tells you who actually set each cookie
+- 🎯 **Known Tracker Detection** — recognizes 22+ trackers from Google, Facebook, LinkedIn, Twitter, and more
 - 📊 **Compliance Grade (A–F)** — instant letter grade with animated emoji and risk bar
 - 📁 **CSV Audit Logs** — every scan is saved locally to spreadsheet files
 - 🔁 **JavaScript Fallback** — checks common privacy URL patterns for sites that load links dynamically
@@ -133,15 +132,15 @@ The backend exposes a single endpoint:
 ```json
 {
   "status": "success",
-  "url": "https://instagram.com",
   "audit_timestamp": "2024-01-15T14:32:07",
   "is_https": true,
   "total_links_found": 1,
   "total_cookies_found": 2,
-  "known_tracker_count": 0,
   "compliance_grade": "B",
-  "links": [...],
-  "cookies": [...]
+  "cookies": [
+    { "name": "_ga", "domain": ".instagram.com", "tracker": "Google Analytics" },
+    { "name": "sessionid", "domain": ".instagram.com", "tracker": null }
+  ]
 }
 ```
 
@@ -174,4 +173,5 @@ Feel free to fork, star ⭐, or reach out with feedback!
 
 ## 🖼️ Preview
 
-To see the extension in action, check out the screenshots folder in this repository!
+To see the extension in action, check out the screenshots folder in this repository:  
+👉 [View Screenshots](https://github.com/MayTulshibagwale/privacy-shield-auditor/tree/main/screenshots)
