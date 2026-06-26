@@ -1,20 +1,32 @@
 # 🔍 Privacy Shield Auditor
 
-A Chrome extension + Python backend that automatically scans any website for privacy compliance — detecting tracking cookies, checking HTTPS security, finding policy links, and grading the site from A to F in real time.
+Ever wondered how much a website is tracking you? **Privacy Shield Auditor** is a Chrome extension that scans any website you visit and gives it a privacy grade from A to F — instantly telling you how safe your data is.
 
-Built as a portfolio project demonstrating web scraping, REST API design, and browser extension development.
+Built as a portfolio project demonstrating web scraping, REST API design, and Chrome extension development.
 
 ---
 
-## ✨ Features
+## ✨ What It Does
 
-- 🔒 **HTTPS Detection** — flags whether the site uses a secure connection
-- ⚖️ **Policy Link Scanner** — finds Privacy Policy, Cookie Notice, and Terms of Service links
-- 🍪 **Cookie Tracker** — counts and identifies all cookies the site drops
-- 🎯 **Known Tracker Detection** — recognizes 22+ trackers from Google, Facebook, LinkedIn, Twitter, and more
-- 📊 **Compliance Grade (A–F)** — instant letter grade with animated emoji and risk bar
-- 📁 **CSV Audit Logs** — every scan is saved locally to spreadsheet files
-- 🔁 **JavaScript Fallback** — checks common privacy URL patterns for sites that load links dynamically
+- 🔒 **Checks if the site is secure** — verifies the website uses HTTPS encryption
+- ⚖️ **Finds privacy disclosures** — looks for Privacy Policy, Cookie Notice, and Terms of Service links
+- 🍪 **Counts tracking cookies** — identifies every cookie the site drops on your browser
+- 🎯 **Names the trackers** — recognizes 22+ known trackers from Google, Facebook, LinkedIn, Twitter, and more
+- 📊 **Gives an instant grade (A–F)** — with an animated emoji and colour-coded risk bar
+- 📁 **Saves a local audit log** — every scan is automatically recorded to a spreadsheet on your computer
+- 🔍 **Smart fallback scanning** — if a website hides its privacy links, the tool finds them another way
+
+---
+
+## 📊 Grading System
+
+| Grade | Emoji | What It Means |
+|---|---|---|
+| A | 😊 | Safe — the site is secure, has a privacy policy, and drops zero cookies |
+| B | 🙂 | Good — has a privacy policy and only a few cookies |
+| C | 😬 | Moderate — several cookies or multiple known ad trackers detected |
+| D | 😨 | Warning — too many cookies or missing privacy disclosures |
+| F | 😱 | Severe — tracking you with no privacy notice, or using an insecure connection |
 
 ---
 
@@ -31,13 +43,16 @@ Built as a portfolio project demonstrating web scraping, REST API design, and br
 
 ## ⚙️ Installation & Setup
 
+### Before you start
+Make sure you have **Python** installed on your computer. You can download it from [python.org](https://python.org).
+
 ### 1. Clone the repository
 ```bash
 git clone https://github.com/MayTulshibagwale/privacy-shield-auditor.git
 cd privacy-shield-auditor
 ```
 
-### 2. Install Python dependencies
+### 2. Install dependencies
 ```bash
 pip install -r requirements.txt
 ```
@@ -48,8 +63,7 @@ pip install -r requirements.txt
 ```
 start.bat
 ```
-
-> 💡 **Tip for Windows users:** Set up Windows Task Scheduler to run `start.bat` on login so the server starts automatically every time you turn on your computer.
+> 💡 **Tip:** Set up Windows Task Scheduler to run `start.bat` on login so the server starts automatically every time you turn on your computer — no terminal needed!
 
 **Mac / Linux** — run in terminal:
 ```bash
@@ -71,27 +85,15 @@ Keep this window open while using the extension.
 
 ## 🚀 How to Use
 
-1. Make sure the backend server is running (`start.bat`)
-2. Navigate to any website in Chrome
-3. Click the **Privacy Shield Auditor** extension icon
-4. The extension automatically scans the current page and shows:
-   - A compliance grade (A–F) with animated emoji
-   - HTTPS status
-   - Number of policy links and cookies found
-   - List of recognized third-party trackers
-5. Click **? Help** for a full explanation of what each score means
-
----
-
-## 📊 Grading System
-
-| Grade | Emoji | Meaning |
-|---|---|---|
-| A | 😊 | Safe — HTTPS, has policy links, zero cookies |
-| B | 🙂 | Good — has policy links, few cookies |
-| C | 😬 | Moderate — several cookies or multiple known trackers |
-| D | 😨 | Warning — heavy cookie load or missing policy links |
-| F | 😱 | Severe — no privacy disclosure while dropping cookies, or no HTTPS |
+1. Start the backend server (`start.bat` on Windows)
+2. Go to any website in Chrome
+3. Click the **Privacy Shield Auditor** icon in your toolbar
+4. The extension automatically scans the page and shows:
+   - A privacy grade (A–F) with animated emoji
+   - Whether the site uses a secure connection
+   - How many privacy policy links and cookies were found
+   - A list of any recognized third-party trackers
+5. Click **? Help** inside the extension for plain-English explanations of every term
 
 ---
 
@@ -100,36 +102,36 @@ Keep this window open while using the extension.
 ```
 privacy-shield-auditor/
 │
-├── server.py              # Flask REST API backend
-├── auditor.py             # Original prototype script
+├── server.py              # Python backend — does all the scanning
+├── auditor.py             # Original prototype script (Phase 1)
 ├── start.bat              # Windows auto-start script
 ├── start.sh               # Mac / Linux auto-start script
-├── requirements.txt       # Python dependencies
+├── requirements.txt       # Python libraries needed to run the project
 │
-├── manifest.json          # Chrome extension config
-├── popup.html             # Extension popup UI
-├── popup.js               # Extension popup logic
-├── index.html             # Full web dashboard
-├── help.html              # User-friendly help & glossary page
+├── manifest.json          # Chrome extension configuration
+├── popup.html             # Extension popup — what you see when you click the icon
+├── popup.js               # Extension logic — connects popup to the backend
+├── index.html             # Full web dashboard version
+├── help.html              # Built-in help page explaining every term
 ```
 
 ---
 
 ## ⚠️ Known Limitations
 
-- The scraper uses `requests` which does not execute JavaScript. Sites that load all content dynamically may return fewer links than expected. A common privacy URL fallback is included to partially address this.
-- Cookie detection only captures cookies set during the initial page load, not cookies set after user interaction.
-- Results may vary depending on the user's location due to region-specific cookie consent banners.
+- Some websites load their content dynamically after the page opens, so the scanner may not see everything. A fallback check on common privacy URL patterns helps reduce this.
+- Cookies are only detected on the initial page load — not after you click around or log in.
+- Results may vary by location since some sites show different cookie banners depending on your country.
 
 ---
 
 ## 🔮 Possible Future Improvements
 
-- [ ] Selenium integration for full JavaScript rendering
-- [ ] Scan multiple pages per domain, not just the homepage
-- [ ] Cookie expiry detection (session vs persistent)
-- [ ] GDPR / CCPA compliance checklist
-- [ ] Historical scan comparison — track how a site's privacy grade changes over time
+- [ ] Full JavaScript rendering — scan what the page looks like after it fully loads
+- [ ] Scan multiple pages per site, not just the homepage
+- [ ] Detect how long each cookie lasts (session vs permanent)
+- [ ] Check against GDPR and CCPA legal requirements
+- [ ] Track how a site's privacy grade changes over time
 
 ---
 
@@ -142,5 +144,5 @@ Feel free to fork, star ⭐, or reach out with feedback!
 
 ## 🖼️ Preview
 
-To see the extension in action, check out the screenshots folder in this repository:  
+To see the extension in action, check out the screenshots folder:  
 👉 [View Screenshots](https://github.com/MayTulshibagwale/privacy-shield-auditor/tree/main/screenshots)
