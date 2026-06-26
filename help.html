@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Shield Auditor — Help Guide</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 40px 20px;
+            max-width: 680px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* ── Page Header ── */
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #30363d;
+        }
+        .page-header h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #f0f6fc;
+            margin-bottom: 8px;
+        }
+        .page-header p {
+            font-size: 14px;
+            color: #8b949e;
+        }
+
+        /* ── Section Headings ── */
+        .section {
+            margin-bottom: 36px;
+        }
+        .section h2 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #f0f6fc;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #21262d;
+        }
+
+        /* ── "What We Check" cards ── */
+        .check-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 12px;
+        }
+        .check-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 16px 14px;
+            text-align: center;
+        }
+        .check-card .icon  { font-size: 26px; margin-bottom: 8px; display: block; }
+        .check-card h3     { font-size: 13px; font-weight: 700; color: #f0f6fc; margin-bottom: 6px; }
+        .check-card p      { font-size: 12px; color: #8b949e; }
+
+        /* ── Grade Cards (A through F) ── */
+        .grade-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 14px 16px;
+            margin-bottom: 10px;
+        }
+        .grade-badge {
+            font-size: 32px;
+            font-weight: 900;
+            min-width: 36px;
+            text-align: center;
+            line-height: 1;
+        }
+        .grade-emoji {
+            font-size: 24px;
+            min-width: 30px;
+            text-align: center;
+        }
+        .grade-info h3   { font-size: 14px; font-weight: 700; color: #f0f6fc; margin-bottom: 4px; }
+        .grade-info p    { font-size: 12px; color: #8b949e; }
+        .grade-info .tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ── Glossary ── */
+        .glossary-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #21262d;
+        }
+        .glossary-item:last-child { border-bottom: none; }
+        .glossary-item .term {
+            font-size: 13px;
+            font-weight: 700;
+            color: #58a6ff;
+            margin-bottom: 4px;
+        }
+        .glossary-item p {
+            font-size: 12px;
+            color: #8b949e;
+        }
+
+        /* ── Footer note ── */
+        .footer-note {
+            text-align: center;
+            font-size: 11px;
+            color: #484f58;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #21262d;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>🔍 Privacy Shield Auditor — Help Guide</h1>
+        <p>Everything you need to know about what this extension does and what your score means.</p>
+    </div>
+
+
+    <!-- What We Check -->
+    <div class="section">
+        <h2>📋 What Does This Extension Check?</h2>
+        <p style="font-size:13px; color:#8b949e; margin-bottom:16px;">
+            Every time you open the extension on a website, it sends the page URL to a local Python backend
+            which scans the site and returns three signals:
+        </p>
+        <div class="check-grid">
+            <div class="check-card">
+                <span class="icon">🔒</span>
+                <h3>HTTPS Security</h3>
+                <p>Checks if the site uses a secure, encrypted connection (HTTPS) or an unsafe one (HTTP).</p>
+            </div>
+            <div class="check-card">
+                <span class="icon">⚖️</span>
+                <h3>Policy Links</h3>
+                <p>Scans the page for links to Privacy Policies, Cookie Notices, or Terms of Service.</p>
+            </div>
+            <div class="check-card">
+                <span class="icon">🍪</span>
+                <h3>Tracking Cookies</h3>
+                <p>Counts cookies the site drops and flags any that belong to known third-party ad trackers.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Grade Meanings -->
+    <div class="section">
+        <h2>🎓 What Does My Score Mean?</h2>
+
+        <!-- Grade A -->
+        <div class="grade-card">
+            <div class="grade-badge" style="color:#3fb950;">A</div>
+            <div class="grade-emoji">😊</div>
+            <div class="grade-info">
+                <span class="tag" style="background:rgba(63,185,80,0.15); color:#3fb950;">Safe</span>
+                <h3>Minimal Tracking Detected</h3>
+                <p>The site uses HTTPS, has a privacy policy, and drops zero cookies. This is the best possible result — your data is being handled responsibly.</p>
+            </div>
+        </div>
+
+        <!-- Grade B -->
+        <div class="grade-card">
+            <div class="grade-badge" style="color:#58a6ff;">B</div>
+            <div class="grade-emoji">🙂</div>
+            <div class="grade-info">
+                <span class="tag" style="background:rgba(88,166,255,0.15); color:#58a6ff;">Good</span>
+                <h3>Compliant Public Notice</h3>
+                <p>The site has some cookies but also clearly posts a privacy policy. They're tracking you, but at least they're being transparent about it.</p>
+            </div>
+        </div>
+
+        <!-- Grade C -->
+        <div class="grade-card">
+            <div class="grade-badge" style="color:#d29922;">C</div>
+            <div class="grade-emoji">😬</div>
+            <div class="grade-info">
+                <span class="tag" style="background:rgba(210,153,34,0.15); color:#d29922;">Moderate Risk</span>
+                <h3>Active Data Gathering</h3>
+                <p>The site drops several cookies or uses 2+ recognized ad trackers (like Google or Facebook). Worth reading their privacy policy closely.</p>
+            </div>
+        </div>
+
+        <!-- Grade D -->
+        <div class="grade-card">
+            <div class="grade-badge" style="color:#ff7b72;">D</div>
+            <div class="grade-emoji">😨</div>
+            <div class="grade-info">
+                <span class="tag" style="background:rgba(255,123,114,0.15); color:#ff7b72;">Warning</span>
+                <h3>Loose Transparency Anchors</h3>
+                <p>The site drops more than 7 cookies or has very few policy links for the amount of tracking it does. Be cautious about what you share here.</p>
+            </div>
+        </div>
+
+        <!-- Grade F -->
+        <div class="grade-card">
+            <div class="grade-badge" style="color:#f85149;">F</div>
+            <div class="grade-emoji">😱</div>
+            <div class="grade-info">
+                <span class="tag" style="background:rgba(248,81,73,0.15); color:#f85149;">Severe Risk</span>
+                <h3>Non-Consensual Tracking</h3>
+                <p>Either the site is not using HTTPS (your data travels in plain text), or it's dropping tracking cookies with zero privacy disclosure. Avoid entering personal information here.</p>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Glossary -->
+    <div class="section">
+        <h2>📖 Glossary — Plain English Definitions</h2>
+
+        <div class="glossary-item">
+            <div class="term">🍪 Cookie</div>
+            <p>A tiny text file a website saves on your browser. Some are useful (like remembering you're logged in), others track your behavior across the internet for advertising.</p>
+        </div>
+
+        <div class="glossary-item">
+            <div class="term">🎯 Tracker / Third-Party Tracker</div>
+            <p>A tracking cookie planted not by the site you're visiting, but by an outside company like Google, Facebook, or LinkedIn. These companies track you across many websites to build an ad profile.</p>
+        </div>
+
+        <div class="glossary-item">
+            <div class="term">🏠 First-Party Cookie</div>
+            <p>A cookie set by the website you're actually visiting (e.g. github.com sets a github.com cookie). Usually harmless — used for login sessions and preferences.</p>
+        </div>
+
+        <div class="glossary-item">
+            <div class="term">🌍 Third-Party Cookie</div>
+            <p>A cookie set by a different domain than the one you're on. For example, visiting news.com but getting a doubleclick.net cookie. This is how cross-site tracking works.</p>
+        </div>
+
+        <div class="glossary-item">
+            <div class="term">🔒 HTTPS</div>
+            <p>HyperText Transfer Protocol Secure. When a site uses HTTPS, all data between your browser and the server is encrypted. If a site only uses HTTP (no S), anyone on the same network can read what you send.</p>
+        </div>
+
+        <div class="glossary-item">
+            <div class="term">⚖️ Policy Link / Compliance Link</div>
+            <p>A link on the page that leads to a Privacy Policy, Cookie Policy, or Terms of Service. Laws like GDPR (Europe) and CCPA (California) require websites to have these if they collect data.</p>
+        </div>
+
+        <div class="glossary-item">
+            <div class="term">📊 Compliance Grade</div>
+            <p>A letter grade (A through F) our tool calculates based on the combination of HTTPS status, number of cookies, number of recognized trackers, and presence of policy links.</p>
+        </div>
+    </div>
+
+
+    <div class="footer-note">
+        Privacy Shield Auditor V2.0 — Built as a portfolio project · Scans run locally on your machine
+    </div>
+
+</body>
+</html>

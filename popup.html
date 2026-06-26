@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            width: 330px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            padding: 14px;
+        }
+
+        /* ── Header ── */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #30363d;
+            margin-bottom: 12px;
+        }
+        .title {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #f0f6fc;
+        }
+        .header-right {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+        /* The small "?" help button in the top-right corner */
+        .help-btn {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: #58a6ff;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 7px;
+            cursor: pointer;
+        }
+        .help-btn:hover {
+            background-color: rgba(88, 166, 255, 0.2);
+        }
+        .version {
+            background-color: rgba(88, 166, 255, 0.1);
+            color: #58a6ff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            border: 1px solid rgba(88, 166, 255, 0.2);
+        }
+
+        /* ── Grade Banner ── */
+        .banner {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 10px;
+            padding: 14px 14px 14px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        /* The animated emoji lives here */
+        #emojiBox {
+            font-size: 38px;
+            display: inline-block;
+            margin-bottom: 2px;
+        }
+
+        #gradeBox {
+            font-size: 64px;
+            font-weight: 900;
+            line-height: 1;
+            color: #8b949e;
+            transition: color 0.4s ease;
+        }
+        #riskLabel {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #8b949e;
+            margin-top: 6px;
+            margin-bottom: 12px;
+            transition: color 0.4s ease;
+        }
+
+        /* Risk progress bar */
+        .risk-bar-track {
+            background-color: #21262d;
+            border-radius: 4px;
+            height: 6px;
+            width: 100%;
+            overflow: hidden;
+        }
+        #riskBar {
+            height: 6px;
+            border-radius: 4px;
+            width: 0%;
+            background-color: #3fb950;
+            transition: width 0.7s ease, background-color 0.4s ease;
+        }
+        .risk-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4px;
+        }
+        .risk-bar-labels span {
+            font-size: 9px;
+            color: #484f58;
+            letter-spacing: 0.3px;
+        }
+
+        /* ── Emoji Animations ── */
+        /* Grade A: happy bounce */
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50%       { transform: translateY(-6px); }
+        }
+        /* Grade B: calm pulse */
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50%       { transform: scale(1.12); }
+        }
+        /* Grade C: nervous wobble */
+        @keyframes wobble {
+            0%, 100% { transform: rotate(0deg); }
+            25%       { transform: rotate(-8deg); }
+            75%       { transform: rotate(8deg); }
+        }
+        /* Grade D: scared shake */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0px); }
+            20%       { transform: translateX(-5px); }
+            40%       { transform: translateX(5px); }
+            60%       { transform: translateX(-5px); }
+            80%       { transform: translateX(5px); }
+        }
+
+        .anim-bounce  { animation: bounce 1.4s ease-in-out infinite; }
+        .anim-pulse   { animation: pulse  2s   ease-in-out infinite; }
+        .anim-wobble  { animation: wobble 1.2s ease-in-out infinite; }
+        .anim-shake   { animation: shake  0.6s ease-in-out infinite; }
+        .anim-shake-fast { animation: shake 0.35s ease-in-out infinite; }
+
+        /* ── Stats Row (3 columns) ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .stat-card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 10px 6px;
+            text-align: center;
+        }
+        .stat-icon  { font-size: 15px; display: block; margin-bottom: 3px; }
+        .stat-value { font-size: 18px; font-weight: 700; color: #f0f6fc; display: block; }
+        .stat-label { font-size: 9px; color: #8b949e; text-transform: uppercase; letter-spacing: 0.4px; margin-top: 2px; display: block; }
+
+        .secure   { color: #3fb950; }
+        .insecure { color: #f85149; }
+
+        /* ── Known Trackers Section ── */
+        .section-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: #484f58;
+            margin-bottom: 6px;
+        }
+        .tracker-box {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            max-height: 88px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+        .tracker-box::-webkit-scrollbar       { width: 4px; }
+        .tracker-box::-webkit-scrollbar-track { background: #0d1117; }
+        .tracker-box::-webkit-scrollbar-thumb { background: #30363d; border-radius: 4px; }
+
+        .tracker-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 10px; border-bottom: 1px solid #21262d; }
+        .tracker-row:last-child { border-bottom: none; }
+        .tracker-name  { font-family: monospace; color: #ff7b72; font-size: 11px; }
+        .tracker-badge { font-size: 9px; color: #8b949e; background-color: #21262d; padding: 2px 6px; border-radius: 4px; }
+        .tracker-empty { padding: 12px 10px; text-align: center; color: #484f58; font-size: 11px; }
+
+        /* ── Footer ── */
+        .footer {
+            background-color: rgba(22, 27, 34, 0.5);
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 10px;
+            color: #8b949e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+        #statusMsg { flex: 1; }
+        #scanTime  { color: #484f58; font-size: 9px; white-space: nowrap; }
+    </style>
+</head>
+<body>
+
+    <!-- Header with title, help button, and version badge -->
+    <div class="header">
+        <h1 class="title">🔍 Privacy Shield Auditor</h1>
+        <div class="header-right">
+            <button class="help-btn" id="helpBtn">? Help</button>
+            <span class="version">V2.0</span>
+        </div>
+    </div>
+
+    <!-- Grade Banner: emoji on top, grade letter below, then risk bar -->
+    <div class="banner">
+        <div id="emojiBox">🔍</div>
+        <div id="gradeBox">--</div>
+        <div id="riskLabel">Initializing scan...</div>
+        <div class="risk-bar-track">
+            <div id="riskBar"></div>
+        </div>
+        <div class="risk-bar-labels">
+            <span>LOW RISK</span>
+            <span>HIGH RISK</span>
+        </div>
+    </div>
+
+    <!-- 3-column stats: HTTPS | Policies | Cookies -->
+    <div class="stats-row">
+        <div class="stat-card">
+            <span class="stat-icon">🔒</span>
+            <span id="httpsValue" class="stat-value">--</span>
+            <span class="stat-label">HTTPS</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-icon">⚖️</span>
+            <span id="linksCount" class="stat-value">0</span>
+            <span class="stat-label">Policies</span>
+        </div>
+        <div class="stat-card">
+            <span class="stat-icon">🍪</span>
+            <span id="cookiesCount" class="stat-value">0</span>
+            <span class="stat-label">Cookies</span>
+        </div>
+    </div>
+
+    <!-- Known Trackers list -->
+    <div class="section-label">⚠️ Known Trackers Detected</div>
+    <div class="tracker-box" id="trackerBox">
+        <div class="tracker-empty">Scanning...</div>
+    </div>
+
+    <!-- Footer: status message + scan timestamp -->
+    <div class="footer">
+        <div id="statusMsg">Ready to scan...</div>
+        <div id="scanTime"></div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+</html>

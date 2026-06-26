@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Enterprise Privacy Auditor Extension",
+  "version": "2.0",
+  "description": "Automated privacy auditing, tracker detection, and compliance grading for any website.",
+  "permissions": [
+    "activeTab",
+    "tabs"
+  ],
+  "action": {
+    "default_popup": "popup.html"
+  }
+}
