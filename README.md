@@ -6,16 +6,6 @@ Built as a portfolio project demonstrating web scraping, REST API design, and br
 
 ---
 
-## 📸 Screenshots
-
-> Drop your own screenshots here after uploading to GitHub!
-
-| Extension Popup | Help Guide |
-|---|---|
-| *(screenshot here)* | *(screenshot here)* |
-
----
-
 ## ✨ Features
 
 - 🔒 **HTTPS Detection** — flags whether the site uses a secure connection
@@ -44,7 +34,7 @@ Built as a portfolio project demonstrating web scraping, REST API design, and br
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/privacy-shield-auditor.git
+git clone https://github.com/MayTulshibagwale/privacy-shield-auditor.git
 cd privacy-shield-auditor
 ```
 
@@ -60,14 +50,15 @@ pip install -r requirements.txt
 start.bat
 ```
 
-**Mac / Linux:**
+> 💡 **Tip for Windows users:** Set up Windows Task Scheduler to run `start.bat` on login so the server starts automatically every time you turn on your computer.
+
+**Mac / Linux** — run in terminal:
 ```bash
-python server.py
+chmod +x start.sh
+./start.sh
 ```
 
-Keep this terminal window open while using the extension.
-
-> 💡 **Tip for Windows users:** Set up Windows Task Scheduler to run `start.bat` on login so the server starts automatically every time you turn on your computer.
+Keep this window open while using the extension.
 
 ### 4. Load the Chrome Extension
 
@@ -111,18 +102,16 @@ Keep this terminal window open while using the extension.
 privacy-shield-auditor/
 │
 ├── server.py              # Flask REST API backend
-├── auditor.py             # Standalone Python scraper (original script)
+├── auditor.py             # Original prototype script
 ├── start.bat              # Windows auto-start script
+├── start.sh               # Mac / Linux auto-start script
 ├── requirements.txt       # Python dependencies
 │
 ├── manifest.json          # Chrome extension config
 ├── popup.html             # Extension popup UI
 ├── popup.js               # Extension popup logic
-├── index.html             # Full web dashboard (optional)
+├── index.html             # Full web dashboard
 ├── help.html              # User-friendly help & glossary page
-│
-├── privacy_links_log.csv  # Auto-generated audit log for policy links
-└── tracking_cookies_log.csv # Auto-generated audit log for cookies
 ```
 
 ---
@@ -180,3 +169,9 @@ The backend exposes a single endpoint:
 
 Built by **Mrunmayee** as a portfolio project.  
 Feel free to fork, star ⭐, or reach out with feedback!
+
+---
+
+## 🖼️ Preview
+
+To see the extension in action, check out the screenshots folder in this repository!
